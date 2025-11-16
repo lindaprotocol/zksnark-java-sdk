@@ -52,7 +52,6 @@ function(check_file_hash has_hash hash_is_good)
   else()
     set("${hash_is_good}" TRUE PARENT_SCOPE)
   endif()
-endfunction()
 
   set("${has_hash}" TRUE PARENT_SCOPE)
 
