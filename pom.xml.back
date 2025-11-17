@@ -34,7 +34,6 @@
 
   <modelVersion>4.0.0</modelVersion>
   
-  <!-- Remove parent POM since it's not available in Maven Central -->
   <groupId>io.github.lindaprotocol</groupId>
   <artifactId>zksnark-java-sdk</artifactId>
   <version>1.0.0</version>
@@ -44,18 +43,17 @@
     <forge-project-id>zksnark-java-sdk</forge-project-id>
     <forge-project-id-uc>zksnark-java-sdk</forge-project-id-uc>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <hawtjni-version>1.18</hawtjni-version>
     <commons-io-version>2.11.0</commons-io-version>
     <junit-version>4.13.2</junit-version>
     <jacoco.version>0.8.8</jacoco.version>
-    <gpg.keyname>LindaProtocol</gpg.keyname>
-    <!-- <gpg.keyname>0xEF7F2D6C</gpg.keyname> -->
+    <gpg.keyname>0xEF7F2D6C</gpg.keyname>
   </properties>
 
-  <name>ZkSNARK Java SDK</name>
-  <description>A Java SDK for zkSNARK operations with native bindings to libsodium and librustzcash</description>
+  <name>${project.artifactId}</name>
+  <description>An uber jar which contains all the zksnark jni platform libraries and dependencies</description>
   <url>https://github.com/lindaprotocol/zksnark-java-sdk</url>
   <inceptionYear>2022</inceptionYear>
 
@@ -73,12 +71,13 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:https://github.com/lindaprotocol/zksnark-java-sdk.git</connection>
-    <developerConnection>scm:git:https://github.com/lindaprotocol/zksnark-java-sdk.git</developerConnection>
-    <url>https://github.com/lindaprotocol/zksnark-java-sdk</url>
+    <connection>scm:https://github.com/lindaprotocol/zksnark-java-sdk.git</connection>
+    <developerConnection>scm:https://github.com/lindaprotocol/zksnark-java-sdk.git</developerConnection>
+    <url>https://github.com/lindaprotocol/zksnark-java-sdk/tree/master</url>
     <tag>HEAD</tag>
   </scm>
 
+  <!-- including A developer as it's required by the maven poms going into central -->
   <developers>
     <developer>
       <id>geeks</id>
@@ -98,17 +97,6 @@
       <timezone>+8</timezone>
     </developer>
   </developers>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
 
   <dependencies>
     <dependency>
@@ -133,18 +121,19 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.1.0</version>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
-      </plugin>
-      
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>3.1.0</version>
       </plugin>
       
       <plugin>
@@ -154,7 +143,7 @@
         <configuration>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <forkMode>once</forkMode>
-          <argLine>@{argLine} -ea -Djava.library.path=${project.basedir}/cpp/build</argLine>
+          <argLine>@{argLine} -ea</argLine>
           <failIfNoTests>false</failIfNoTests>
           <workingDirectory>${project.build.directory}</workingDirectory>
           <includes>
@@ -186,7 +175,7 @@
 
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.2.2</version>
         <executions>
           <execution>
             <goals>
@@ -200,12 +189,11 @@
           </archive>
         </configuration>
       </plugin>
-
-      <!-- Source JAR -->
+      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>2.2.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -216,31 +204,8 @@
           </execution>
         </executions>
       </plugin>
-
-      <!-- Javadoc JAR -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.3.1</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <phase>package</phase>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <source>8</source>
-              <encoding>${project.build.sourceEncoding}</encoding>
-              <additionalOptions>
-                <additionalOption>-Xdoclint:none</additionalOption>
-              </additionalOptions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <!-- Bundle Plugin for OSGi -->
+      
+      <!--http://felix.apache.org/documentation/subprojects/apache-felix-maven-bundle-plugin-bnd.html-->
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
@@ -273,15 +238,26 @@
           </instructions>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 
   <profiles>
     <profile>
       <id>release</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.fusesource.hawtjni</groupId>
+          <artifactId>hawtjni-runtime</artifactId>
+          <version>${hawtjni-version}</version>
+          <classifier>sources</classifier>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
+
       <build>
         <plugins>
-          <!-- GPG Signing -->
+          <!-- We want to sign the artifact, the POM, and all attached artifacts -->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
@@ -300,12 +276,63 @@
               </execution>
             </executions>
           </plugin>
-
-          <!-- Nexus Staging -->
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+            <configuration>
+              <skipSource>true</skipSource>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <source>8</source>
+              <target>8</target>
+              <fork>true</fork>
+              <verbose>true</verbose>
+              <encoding>UTF-8</encoding>
+              <showWarnings>false</showWarnings>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.3.0</version>
+            <executions>
+              <execution>
+                <id>uber-sources-jar</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptors>
+                    <descriptor>${basedir}/src/main/descriptors/uber-sources.xml</descriptor>
+                  </descriptors>
+                  <appendAssemblyId>true</appendAssemblyId>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.8</version>
+            <version>1.6.7</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>ossrh</serverId>

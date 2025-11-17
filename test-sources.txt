@@ -1,0 +1,2 @@
+src/test/java/org/linda/common/zksnark/LibsodiumTest.java
+src/test/java/org/linda/common/zksnark/LibrustzcashTest.java
