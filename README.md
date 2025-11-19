@@ -3,7 +3,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.lindaprotocol/zksnark-java-sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.lindaprotocol%22%20AND%20a:%22zksnark-java-sdk%22)
 
 
-A Java SDK for zkSNARK operations with native bindings to libsodium and librustzcash.
+A Java SDK for zkSNARK 1.0.0 operations with native bindings to libsodium and librustzcash.
 
 # libzksnark
 a zksnark jni library
