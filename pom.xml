@@ -37,7 +37,7 @@
   <!-- Remove parent POM since it's not available in Maven Central -->
   <groupId>io.github.lindaprotocol</groupId>
   <artifactId>zksnark-java-sdk</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>bundle</packaging>
 
   <properties>
