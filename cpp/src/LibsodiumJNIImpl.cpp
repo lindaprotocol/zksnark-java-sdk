@@ -2,7 +2,11 @@
 #include "sodium.h"
 #include "org_linda_common_zksnark_Libsodium_LibsodiumJNI.h"
 
-JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1state_1init
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1state_1init
     (JNIEnv *env, jobject obj) {
     crypto_generichash_blake2b_state* state_p = new crypto_generichash_blake2b_state();
     if (!state_p) {
@@ -11,7 +15,7 @@ JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJN
     return (jlong) state_p;
 }
 
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1state_1free
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1state_1free
     (JNIEnv *env, jobject obj, jlong state) {
     crypto_generichash_blake2b_state* state_p = (crypto_generichash_blake2b_state*) state;
     if (state_p) {
@@ -19,7 +23,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI
     }
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1init_1salt_1personal
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1init_1salt_1personal
     (JNIEnv *env, jobject obj, jlong state, jbyteArray key, jint keylen, jint outlen, jbyteArray salt, jbyteArray personal) {
     
     unsigned char* key_p = NULL;
@@ -67,7 +71,7 @@ JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1update
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1update
     (JNIEnv *env, jobject obj, jlong state, jbyteArray in, jlong inlen) {
     
     unsigned char* in_p = NULL;
@@ -91,7 +95,7 @@ JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1final
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1final
     (JNIEnv *env, jobject obj, jlong state, jbyteArray out, jint outlen) {
     
     unsigned char* out_p = NULL;
@@ -117,7 +121,7 @@ JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1generichash_1blake2b_1salt_1personal
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1generichash_1blake2b_1salt_1personal
     (JNIEnv *env, jobject obj, jbyteArray out, jint outlen, jbyteArray in, jlong inlen, jbyteArray key, jint keylen, jbyteArray salt, jbyteArray personal) {
     
     unsigned char* out_p = NULL;
@@ -188,7 +192,7 @@ cleanup:
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1aead_1chacha20poly1305_1ietf_1decrypt
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1aead_1chacha20poly1305_1ietf_1decrypt
     (JNIEnv *env, jobject obj, jbyteArray m, jlongArray mlen_p, jbyteArray nsec, jbyteArray c, jlong clen, jbyteArray ad, jlong adlen, jbyteArray npub, jbyteArray k) {
     
     unsigned char* m_p = NULL;
@@ -273,7 +277,7 @@ cleanup:
     return ret;
 }
 
-JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_00024LibsodiumJNI_crypto_1aead_1chacha20poly1305_1ietf_1encrypt
+JNIEXPORT jint JNICALL Java_org_linda_common_zksnark_Libsodium_LibsodiumJNI_crypto_1aead_1chacha20poly1305_1ietf_1encrypt
     (JNIEnv *env, jobject obj, jbyteArray c, jlongArray clen_p, jbyteArray m, jlong mlen, jbyteArray ad, jlong adlen, jbyteArray nsec, jbyteArray npub, jbyteArray k) {
     
     unsigned char* c_p = NULL;
@@ -357,3 +361,7 @@ cleanup:
 
     return ret;
 }
+
+#ifdef __cplusplus
+}
+#endif

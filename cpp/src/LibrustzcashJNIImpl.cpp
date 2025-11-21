@@ -6,6 +6,11 @@
 #include "librustzcash.h"
 #include <iostream>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 jboolean bool2jboolean(bool b) {
     if (b) {
         return JNI_TRUE;
@@ -23,7 +28,8 @@ jboolean bool2jboolean(bool b) {
  * Method:    librustzcashInitZksnarkParams
  * Signature: ([BILjava/lang/String;[BILjava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashInitZksnarkParams
+
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashInitZksnarkParams
     (JNIEnv * env, jobject, jstring spend_path, jstring spend_hash, jstring output_path, jstring output_hash) {
     const codeunit* sp = (const codeunit*) env->GetStringUTFChars(spend_path, nullptr);
     const char* sh = (const char*) env->GetStringUTFChars(spend_hash, nullptr);
@@ -46,7 +52,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashZip32XskMaster
  * Signature: ([BI[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashZip32XskMaster
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashZip32XskMaster
   (JNIEnv * env, jobject, jbyteArray seed, jint seedlen, jbyteArray xsk_master) {
 //    void librustzcash_zip32_xsk_master(
 //        const unsigned char *seed,
@@ -69,7 +75,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashZip32XskDerive
  * Signature: ([BI[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashZip32XskDerive
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashZip32XskDerive
   (JNIEnv * env, jobject, jbyteArray xsk_parent, jint i, jbyteArray xsk_i) {
 //    void librustzcash_zip32_xsk_derive(
 //        const unsigned char *xsk_parent,
@@ -92,7 +98,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashZip32XfvkAddress
  * Signature: ([B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashZip32XfvkAddress
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashZip32XfvkAddress
   (JNIEnv * env, jobject, jbyteArray xfvk, jbyteArray j, jbyteArray j_ret, jbyteArray addr_ret) {
 //    bool librustzcash_zip32_xfvk_address(
 //        const unsigned char *xfvk,
@@ -121,7 +127,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashAskToAk
  * Signature: ([B[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashAskToAk
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashAskToAk
   (JNIEnv * env, jobject, jbyteArray ask, jbyteArray result) {
 //    void librustzcash_ask_to_ak(const unsigned char *ask, unsigned char *result);
 
@@ -141,7 +147,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashSaplingComputeNf
  * Signature: ([B[BJ[B[B[BJ[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingComputeNf
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingComputeNf
   (JNIEnv * env, jobject, jbyteArray diversifier, jbyteArray pk_d, jlong value, jbyteArray r, jbyteArray ak, jbyteArray nk, jlong position, jbyteArray result) {
 //    bool librustzcash_sapling_compute_nf(
 //        const unsigned char *diversifier,
@@ -179,7 +185,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashNskToNk
  * Signature: ([B[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashNskToNk
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashNskToNk
   (JNIEnv * env, jobject, jbyteArray nsk, jbyteArray result) {
 //    void librustzcash_nsk_to_nk(const unsigned char *nsk, unsigned char *result);
 
@@ -199,7 +205,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashSaplingGenerateR
  * Signature: ([B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingGenerateR
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingGenerateR
   (JNIEnv * env, jobject, jbyteArray result) {
 //    void librustzcash_sapling_generate_r(
 //        unsigned char *result
@@ -219,7 +225,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashSaplingKaDerivepublic
  * Signature: ([B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingKaDerivepublic
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingKaDerivepublic
   (JNIEnv * env, jobject, jbyteArray diversifier, jbyteArray esk, jbyteArray result) {
 //    bool librustzcash_sapling_ka_derivepublic(
 //        const unsigned char *diversifier,
@@ -246,7 +252,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashCrhIvk
  * Signature: ([B[B[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashCrhIvk
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashCrhIvk
   (JNIEnv *env, jobject, jbyteArray ak, jbyteArray nk, jbyteArray result) {
 //    void librustzcash_crh_ivk(const unsigned char *ak, const unsigned char *nk, unsigned char *result);
 
@@ -272,7 +278,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashSaplingKaAgree
  * Signature: ([B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingKaAgree
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingKaAgree
   (JNIEnv * env, jobject, jbyteArray p, jbyteArray sk, jbyteArray result) {
 
   const unsigned char * pPoint = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(p, nullptr));
@@ -294,7 +300,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashCheckDiversifier
  * Signature: ([B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashCheckDiversifier
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashCheckDiversifier
   (JNIEnv * env, jobject, jbyteArray diversifier) {
   const unsigned char * d = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(diversifier, nullptr));
   if (d == NULL)
@@ -311,7 +317,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashIvkToPkd
  * Signature: ([B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashIvkToPkd
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashIvkToPkd
   (JNIEnv * env, jobject, jbyteArray ivk, jbyteArray diversifier, jbyteArray result) {
 
   const unsigned char * i = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(ivk, nullptr));
@@ -333,7 +339,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingComputeCm
  * Signature: ([B[BJ[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingComputeCm
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingComputeCm
   (JNIEnv * env, jobject, jbyteArray diversifier, jbyteArray pk_d, jlong value, jbyteArray r, jbyteArray result) {
 
   const unsigned char * d = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(diversifier, nullptr));
@@ -357,7 +363,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingProvingCtxInit
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingProvingCtxInit
+JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingProvingCtxInit
   (JNIEnv *, jobject) {
   return (jlong) librustzcash_sapling_proving_ctx_init();
 }
@@ -367,7 +373,7 @@ JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustz
  * Method:    librustzcashSaplingSpendProof
  * Signature: (J[B[B[B[B[BJ[B[B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingSpendProof
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingSpendProof
   (JNIEnv * env, jobject, jlong ctx, jbyteArray ak, jbyteArray nsk, jbyteArray diversifier, jbyteArray rcm,jbyteArray ar,
   jlong value, jbyteArray anchor, jbyteArray witness, jbyteArray cv, jbyteArray rk, jbyteArray zkproof) {
 
@@ -406,7 +412,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingOutputProof
  * Signature: (J[B[B[B[BJ[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingOutputProof
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingOutputProof
   (JNIEnv * env, jobject, jlong ctx, jbyteArray esk, jbyteArray diversifier, jbyteArray pk_d, jbyteArray rcm, jlong value, jbyteArray cv, jbyteArray zkproof) {
   const unsigned char * e = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(esk, nullptr));
   const unsigned char * d = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(diversifier, nullptr));
@@ -433,7 +439,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingSpendSig
  * Signature: ([B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingSpendSig
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingSpendSig
   (JNIEnv * env, jobject, jbyteArray ask, jbyteArray ar, jbyteArray sighash, jbyteArray result) {
 
   const unsigned char * askPoint = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(ask, nullptr));
@@ -457,7 +463,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingBindingSig
  * Signature: (JJ[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingBindingSig
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingBindingSig
   (JNIEnv * env, jobject, jlong ctx, jlong valueBalance, jbyteArray sighash, jbyteArray result) {
 
   const unsigned char * s = reinterpret_cast<const unsigned char *>(env->GetByteArrayElements(sighash, nullptr));
@@ -477,7 +483,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingProvingCtxFree
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingProvingCtxFree
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingProvingCtxFree
   (JNIEnv *, jobject, jlong ctx) {
   librustzcash_sapling_proving_ctx_free((void *)ctx);
 }
@@ -491,7 +497,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashSaplingVerificationCtxInit
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingVerificationCtxInit
+JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingVerificationCtxInit
   (JNIEnv *, jobject) {
 //    void * librustzcash_sapling_verification_ctx_init();
     return (jlong) librustzcash_sapling_verification_ctx_init();
@@ -502,7 +508,7 @@ JNIEXPORT jlong JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustz
  * Method:    librustzcashSaplingCheckSpend
  * Signature: (J[B[B[B[B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingCheckSpend
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingCheckSpend
   (JNIEnv * env, jobject, jlong ctx, jbyteArray cv, jbyteArray anchor, jbyteArray nullifier, jbyteArray rk, jbyteArray zkproof, jbyteArray spendAuthSig, jbyteArray sighashValue) {
 //    bool librustzcash_sapling_check_spend(
 //        void *ctx,
@@ -541,7 +547,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingCheckOutput
  * Signature: (J[B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingCheckOutput
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingCheckOutput
   (JNIEnv *env, jobject, jlong ctx, jbyteArray cv, jbyteArray cm, jbyteArray ephemeralKey, jbyteArray zkproof) {
 //    bool librustzcash_sapling_check_output(
 //        void *ctx,
@@ -571,7 +577,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingFinalCheck
  * Signature: (JJ[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingFinalCheck
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingFinalCheck
   (JNIEnv * env, jobject, jlong ctx, jlong valueBalance, jbyteArray bindingSig, jbyteArray sighashValue) {
 //    bool librustzcash_sapling_final_check(
 //        void *ctx,
@@ -596,7 +602,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingCheckSpendNew
  * Signature: ([B[B[B[B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingCheckSpendNew
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingCheckSpendNew
   (JNIEnv * env, jobject, jbyteArray cv, jbyteArray anchor, jbyteArray nullifier, jbyteArray rk, jbyteArray zkproof, jbyteArray spendAuthSig, jbyteArray sighashValue) {
 //    bool librustzcash_sapling_check_spend_new(
 //        const unsigned char *cv,
@@ -634,7 +640,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingCheckOutputNew
  * Signature: ([B[B[B[B)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingCheckOutputNew
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingCheckOutputNew
   (JNIEnv *env, jobject, jbyteArray cv, jbyteArray cm, jbyteArray ephemeralKey, jbyteArray zkproof) {
 //    bool librustzcash_sapling_check_output_new(
 //        const unsigned char *cv,
@@ -663,7 +669,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingFinalCheckNew
  * Signature: (J[B[B[BI[BI)Z
  */
-JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingFinalCheckNew
+JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingFinalCheckNew
   (JNIEnv * env, jobject, jlong valueBalance, jbyteArray bindingSig, jbyteArray sighashValue, jbyteArray spendCv, jint spendCvLen, jbyteArray outputCv, jint outputCvLen) {
 //    bool librustzcash_sapling_final_check_new(
 //        int64_t valueBalance,
@@ -698,7 +704,7 @@ JNIEXPORT jboolean JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Libru
  * Method:    librustzcashSaplingVerificationCtxFree
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashSaplingVerificationCtxFree
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashSaplingVerificationCtxFree
   (JNIEnv *, jobject, jlong ctx) {
 //    void librustzcash_sapling_verification_ctx_free(void *);
     librustzcash_sapling_verification_ctx_free((void *) ctx);
@@ -709,7 +715,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashMerkleHash
  * Signature: (I[B[B[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashMerkleHash
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashMerkleHash
   (JNIEnv *env, jobject, jint depth, jbyteArray a, jbyteArray b, jbyteArray result) {
 //    void librustzcash_merkle_hash(
 //        size_t depth,
@@ -735,7 +741,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashTreeUncommitted
  * Signature: ([B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashTreeUncommitted
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashTreeUncommitted
   (JNIEnv *env, jobject, jbyteArray result) {
 //    void librustzcash_tree_uncommitted(
 //        unsigned char *result
@@ -755,7 +761,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
  * Method:    librustzcashToScalar
  * Signature: ([B[B)V
  */
-JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024LibrustzcashJNI_librustzcashToScalar
+JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_LibrustzcashJNI_librustzcashToScalar
   (JNIEnv *env, jobject, jbyteArray input, jbyteArray result) {
 //    void librustzcash_to_scalar(const unsigned char *input, unsigned char *result);
 
@@ -769,3 +775,7 @@ JNIEXPORT void JNICALL Java_org_linda_common_zksnark_Librustzcash_00024Librustzc
     env->ReleaseByteArrayElements(result,(jbyte*)r,0);
     env->ReleaseByteArrayElements(input,(jbyte*)i,0);
 }
+
+#ifdef __cplusplus
+}
+#endif
