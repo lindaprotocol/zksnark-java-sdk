@@ -11,37 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// package org.linda.common.zksnark;
-
-// import org.linda.common.util.Utils;
-
-// public class LibsodiumWrapper {
-//     private static final Libsodium INSTANCE = new Libsodium();
-
-//     static {
-//         Utils.LIBRARY.load();
-//     }
-
-//     private LibsodiumWrapper() throws IllegalAccessException
-//     {
-//         throw new IllegalAccessException();
-//     }
-
-//   public static Libsodium getInstance() {
-//     return INSTANCE;
-//   }
-
-// }
 package org.linda.common.zksnark;
+
+import org.linda.common.util.Utils;
 
 public class LibsodiumWrapper {
     private static final Libsodium INSTANCE = new Libsodium();
 
-    private LibsodiumWrapper() throws IllegalAccessException {
-        throw new IllegalAccessException("LibsodiumWrapper is a utility class and cannot be instantiated");
+    static {
+        Utils.LIBRARY.load();
     }
 
-    public static Libsodium getInstance() {
-        return INSTANCE;
+    private LibsodiumWrapper() throws IllegalAccessException
+    {
+        throw new IllegalAccessException();
     }
+
+  public static Libsodium getInstance() {
+    return INSTANCE;
+  }
+
 }
