@@ -22,6 +22,18 @@ public class LibrustzcashWrapper {
         Utils.LIBRARY.load();
     }
 
+    static {
+        try {
+            System.out.println("Loading librustzcashjni library...");
+            System.loadLibrary("librustzcashjni");
+            System.out.println("librustzcashjni library loaded successfully");
+        } catch (UnsatisfiedLinkError e) {
+            System.err.println("Failed to load librustzcashjni: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     private LibrustzcashWrapper() throws IllegalAccessException
     {
         throw new IllegalAccessException();
