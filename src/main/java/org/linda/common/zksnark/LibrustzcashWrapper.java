@@ -24,11 +24,11 @@ public class LibrustzcashWrapper {
 
     static {
         try {
-            System.out.println("Loading librustzcashjni library...");
-            System.loadLibrary("librustzcashjni");
-            System.out.println("librustzcashjni library loaded successfully");
+            System.out.println("Loading zksnarkjni library...");
+            System.loadLibrary("zksnarkjni");
+            System.out.println("zksnarkjni library loaded successfully");
         } catch (UnsatisfiedLinkError e) {
-            System.err.println("Failed to load librustzcashjni: " + e.getMessage());
+            System.err.println("Failed to load zksnarkjni: " + e.getMessage());
             e.printStackTrace();
             throw e;
         }
