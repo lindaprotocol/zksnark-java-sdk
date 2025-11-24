@@ -125,7 +125,7 @@ cd zksnark-java-sdk
 # Build native libraries
 cd cpp
 mkdir build && cd build
-cmake ..
+CC=cc cmake -DJAVA_INCLUDE_PATH=$JAVA_HOME/include -DJAVA_INCLUDE_PATH2=$JAVA_HOME/include/linux -DJAVA_JVM_LIBRARY=$JAVA_HOME/lib/server/libjvm.so ..
 make
 
 # Build Java SDK
